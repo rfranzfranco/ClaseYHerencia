@@ -31,7 +31,8 @@ namespace ClasesHerencia
             }
         }
 
-        public void login() {
+        public void login()
+        {
             Console.WriteLine("Login con polimorfismo");
         }
     }

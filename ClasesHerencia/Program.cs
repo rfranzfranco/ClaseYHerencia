@@ -82,7 +82,6 @@ namespace ClasesHerencia
                 Sueldo = 54
             });
 
-
             MostrarLista(listaDocentes);
 
             Double promedio = getPromedio(listaDocentes);
@@ -98,8 +97,111 @@ namespace ClasesHerencia
             Console.WriteLine("\n--- Promedio Cuatro Modificado: {0}", promedio4.ToString("##.##"));
 
 
-            Console.ReadKey(); 
+            //Console.ReadKey(); 
+
+            //lista de Estudiantes
+            List<Estudiante> listaEstudiantes = new List<Estudiante>();
+            listaEstudiantes.Add(new Estudiante()
+            {
+                Cuenta = "fjorge",
+                Password = "45678",
+                Nombre = "Jorge",
+                Matricula = "78459F5R",
+                Edad = 21
+            });
+            listaEstudiantes.Add(new Estudiante()
+            {
+                Cuenta = "lrenata",
+                Password = "98765",
+                Nombre = "Renata",
+                Matricula = "78589H",
+                Edad = 18
+            });
+            listaEstudiantes.Add(new Estudiante()
+            {
+                Cuenta = "jluis",
+                Password = "45980",
+                Nombre = "Jose",
+                Matricula = "75112Y",
+                Edad = 26
+            });
+            listaEstudiantes.Add(new Estudiante()
+            {
+                Cuenta = "jcarlos",
+                Password = "89744",
+                Nombre = "Carlos",
+                Matricula = "7R8962",
+                Edad = 27
+            });
+            listaEstudiantes.Add(new Estudiante()
+            {
+                Cuenta = "palfonso",
+                Password = "8746",
+                Nombre = "Alfonso",
+                Matricula = "7895177E",
+                Edad = 29
+            });
+            MostrarLista(listaEstudiantes);
+
+            double promedioEs = getPromedioEs(listaEstudiantes);
+            Console.WriteLine("\n--- PromedioEs:{0}", promedioEs.ToString("##.##"));
+
+            double promedioEs2 = getPromedioEsDos(listaEstudiantes);
+            Console.WriteLine("\n--- PromedioEs2:{0}", promedioEs2.ToString("##.##"));
+
+            double promedioEs3 = getPromedioEsTres(listaEstudiantes);
+            Console.WriteLine("\n--- PromedioEs3:{0}", promedioEs3.ToString("##.##"));
+
+            double promedioEs4 = getPromedioEsCuatro(listaEstudiantes);
+            Console.WriteLine("\n--- PromedioEs4:{0}", promedioEs4.ToString("##.##"));
+
+            Console.ReadKey();
         }
+
+        private static double getPromedioEsCuatro(List<Estudiante> listaEstudiantes)
+        {
+            //consultas LINQ
+            double prom = (
+
+                from item in listaEstudiantes
+                where item.Edad < 27
+                select item.Edad
+                ).Average();
+            return prom;
+        }
+        private static double getPromedioEsTres(List<Estudiante> listaEstudiantes)
+        {
+            //funciones Lambda
+            double sum = listaEstudiantes.Sum(x => x.Edad);
+            int total = listaEstudiantes.Count;
+            return sum / total;
+        }
+
+        private static double getPromedioEsDos(List<Estudiante> listaEstudiantes)
+        {
+            double promedio = listaEstudiantes.Average(x => x.Edad);
+            return promedio;
+        }
+
+        private static double getPromedioEs(List<Estudiante> listaEstudiantes)
+        {
+            double sum = 0;
+            foreach (Estudiante item in listaEstudiantes)
+            {
+                sum += item.Edad;
+            }
+            return sum / listaEstudiantes.Count();
+        }
+
+        private static void MostrarLista(List<Estudiante> listaEstudiantes)
+        {
+            Console.WriteLine("\n----------- LISTA DE ESTUDIANTES -----------\n");
+            foreach (Estudiante item in listaEstudiantes)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
 
         private static double getPromedioCuatro(List<Docente> listaDocentes)
         {
